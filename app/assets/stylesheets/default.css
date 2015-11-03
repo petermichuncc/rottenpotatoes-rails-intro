@@ -24,6 +24,9 @@ h1 {
   width: 100%;
   border-bottom: 1px solid DarkSlateGrey;
 }
+#movies .hilite {
+  background-color: yellow;
+}
 h1.title {
   margin: 0 0 1em;
   padding: 10px;
