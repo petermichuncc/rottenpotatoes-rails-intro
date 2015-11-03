@@ -9,9 +9,33 @@ class MoviesController < ApplicationController
     @movie = Movie.find(id) # look up movie by unique ID
     # will render app/views/movies/show.<extension> by default
   end
-
+  @issort=false
+  @all_ratings=Array.new
+  @ratings=Array.new
+  
   def index
-    @movies = Movie.all
+    if params[:rating]!=nil
+      @ratings= Hash[params[:rating]].keys
+         
+    else
+      @ratings=Movie.ratingcollection
+    end
+    @all_ratings=Movie.ratingcollection
+    
+    if params[:sort]=="titlesort"
+      
+      @movies = Movie.all.order(title: :asc)
+      @issort="titlesort"
+    elsif params[:sort]=="datesort"
+      
+      @movies = Movie.all.order(release_date: :asc)
+      @issort="datesort"
+    else
+            
+      @movies=Movie.where(rating: @ratings)
+      @issort=false
+    end
+    
   end
 
   def new
@@ -41,5 +65,10 @@ class MoviesController < ApplicationController
     flash[:notice] = "Movie '#{@movie.title}' deleted."
     redirect_to movies_path
   end
+
+  
+
+
+
 
 end

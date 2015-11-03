@@ -18,6 +18,7 @@ movies = [{:title => 'Aladdin', :rating => 'G', :release_date => '25-Nov-1992'},
       	  {:title => 'Chicken Run', :rating => 'G', :release_date => '21-Jun-2000'},
   	 ]
 
+all_ratings = ['G','PG','PG-13','R']
 movies.each do |movie|
   Movie.create!(movie)
 end
