@@ -1,11 +1,11 @@
 class Movie < ActiveRecord::Base
-  def Movie.ratingcollection
-    ratingcollect=Array.new
-    i=0
-    Movie.select(:Rating).distinct.each  do |movie|
-      ratingcollect[i]=movie.rating
-      i+=1;
-    end
-    return ratingcollect.sort
+
+  def self.rates
+    ['G','PG','PG-13','R','NC-17']
+  end
+
+  def self.filter_by_rating (rates)
+    rate = rates.keys.map {|key| key.to_s} if rates.is_a? Hash
+    where(:rating => rate)
   end
 end
